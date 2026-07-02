@@ -1,23 +1,41 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
-    <PropertyGroup>
-        <IsPackable>true</IsPackable>
-        <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
-    </PropertyGroup>
+    <!--
+      Vendored from https://github.com/alexhiggins732/IdentityServer8, pinned commit 08051c9b
+      (merge of PR #41 "fix call method fail" for
+      https://github.com/alexhiggins732/IdentityServer8/issues/40 - the MethodAccessException
+      against Microsoft.IdentityModel.Tokens.CollectionUtilities.IsNullOrEmpty that broke boot
+      on the HigginsSoft.IdentityServer8 8.0.4 NuGet package once net10 forced
+      Microsoft.IdentityModel.* >= 8.0.1). See ../../VENDORED_COMMIT.txt for provenance.
+
+      This csproj is a minimal replacement authored for this solution (see
+      IdentityServer8.Storage.csproj comment for full rationale). Source files (.cs) under
+      src/ are otherwise an unmodified copy of the upstream commit.
+
+      Microsoft.IdentityModel.Protocols.OpenIdConnect is pinned to 8.0.1 to match this
+      solution's own dependency floor (forced by Microsoft.AspNetCore.Authentication.JwtBearer
+      10.0.9) - this is the version against which the upstream fix actually resolves the
+      MethodAccessException, since CollectionUtilities.IsNullOrEmpty is now called with the
+      member visibility the 8.0.1+ binaries actually expose.
+    -->
 
     <PropertyGroup>
-        <ContinuousIntegrationBuild Condition="'$(TF_BUILD)' == 'true'">True</ContinuousIntegrationBuild>
-        <ContinuousIntegrationBuild Condition="'$(GITHUB_ACTIONS)' == 'true'">True</ContinuousIntegrationBuild>
+        <TargetFramework>net10.0</TargetFramework>
+        <ImplicitUsings>enable</ImplicitUsings>
+        <Nullable>enable</Nullable>
+        <IsPackable>false</IsPackable>
+        <NoWarn>$(NoWarn);CS0618;SYSLIB0023;SYSLIB0020;EF1001</NoWarn>
     </PropertyGroup>
 
     <ItemGroup>
-        <PackageReference Include="IdentityModel" />
-        <PackageReference Include="Microsoft.IdentityModel.Protocols.OpenIdConnect" />
-        <PackageReference Include="Microsoft.AspNetCore.Authentication.OpenIdConnect" />
+        <PackageReference Include="IdentityModel" Version="6.2.0" />
+        <PackageReference Include="Microsoft.IdentityModel.Protocols.OpenIdConnect" Version="8.0.1" />
+        <PackageReference Include="Microsoft.AspNetCore.Authentication.OpenIdConnect" Version="10.0.9" />
     </ItemGroup>
 
     <ItemGroup>
         <ProjectReference Include="..\..\Security\IdentityServer8.Security\IdentityServer8.Security.csproj" />
         <ProjectReference Include="..\..\Storage\src\IdentityServer8.Storage.csproj" />
     </ItemGroup>
+
 </Project>

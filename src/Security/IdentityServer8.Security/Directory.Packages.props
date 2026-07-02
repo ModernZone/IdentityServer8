@@ -1,0 +1,11 @@
+<Project>
+    <!--
+      Neutral Directory.Packages.props: disable Central Package Management for these three
+      projects. The upstream root Directory.Packages.props sets ManagePackageVersionsCentrally=true
+      with net8.0-era central versions that conflict with the explicit Version= attributes these
+      csproj files use for the MZM net10.0 dependency floor. This nearest-wins file shadows it.
+    -->
+    <PropertyGroup>
+        <ManagePackageVersionsCentrally>false</ManagePackageVersionsCentrally>
+    </PropertyGroup>
+</Project>

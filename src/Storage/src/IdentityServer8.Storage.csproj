@@ -1,29 +1,28 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
+    <!--
+      Vendored from https://github.com/alexhiggins732/IdentityServer8, pinned commit 08051c9b
+      (merge of PR #41 "fix call method fail", tip of master as of 2026-07-01).
+      See ../../VENDORED_COMMIT.txt for provenance.
+
+      This csproj is NOT the upstream repo's csproj — it is a minimal replacement authored
+      for this solution so the vendored source builds against our net10.0 / Microsoft.IdentityModel
+      8.0.1+ dependency floor, without pulling in the upstream repo's own Directory.Build.props /
+      Directory.Packages.props / signing-key / NuGet-pack infrastructure (irrelevant here, since
+      we consume this as a ProjectReference, not a package).
+    -->
+
     <PropertyGroup>
-
-        <Description>Storage interfaces and models for IdentityServer8</Description>
-        <IsPackable>true</IsPackable>
-        <GeneratePackageOnBuild>True</GeneratePackageOnBuild>
-    </PropertyGroup>
-
-    <PropertyGroup>
-        <ContinuousIntegrationBuild Condition="'$(TF_BUILD)' == 'true'">True</ContinuousIntegrationBuild>
-        <ContinuousIntegrationBuild Condition="'$(GITHUB_ACTIONS)' == 'true'">True</ContinuousIntegrationBuild>
-
+        <TargetFramework>net10.0</TargetFramework>
+        <ImplicitUsings>enable</ImplicitUsings>
+        <Nullable>disable</Nullable>
+        <IsPackable>false</IsPackable>
+        <NoWarn>$(NoWarn);CS0618;SYSLIB0023;SYSLIB0020;EF1001</NoWarn>
     </PropertyGroup>
 
     <ItemGroup>
-      <None Include="..\..\..\icon.jpg">
-        <Pack>True</Pack>
-        <PackagePath>\</PackagePath>
-      </None>
-    </ItemGroup>
-
-
-    <ItemGroup>
-        <PackageReference Include="IdentityModel" />
-        <PackageReference Include="Newtonsoft.Json" />
+        <PackageReference Include="IdentityModel" Version="6.2.0" />
+        <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
     </ItemGroup>
 
 </Project>

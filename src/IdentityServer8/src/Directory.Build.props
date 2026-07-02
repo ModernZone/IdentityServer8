@@ -1,0 +1,16 @@
+<Project>
+    <!--
+      Neutral Directory.Build.props for MZM.IdentityServer consumption.
+
+      These three projects (IdentityServer8, IdentityServer8.Security, IdentityServer8.Storage)
+      are consumed as git-submodule ProjectReferences from MZM.IdentityServer on net10.0, NOT
+      built/packaged as the upstream HigginsSoft.IdentityServer8 NuGet packages.
+
+      This file deliberately does NOT import the upstream root Directory.Build.props chain
+      (../Directory.Build.props -> .../Directory.Build.props) which pins TargetFramework=net8.0,
+      SignAssembly=true (key.snk), PackageId=HigginsSoft.*, and adds NetAnalyzers/SourceLink
+      package references. All build settings live in each project's own .csproj instead.
+      MSBuild picks the nearest Directory.Build.props (this one) walking up from the .csproj,
+      so the upstream chain is fully shadowed. See MZM.IdentityServer for provenance.
+    -->
+</Project>
