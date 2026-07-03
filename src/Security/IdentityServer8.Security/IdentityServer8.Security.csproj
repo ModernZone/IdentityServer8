@@ -15,7 +15,16 @@
         <TargetFramework>net10.0</TargetFramework>
         <ImplicitUsings>enable</ImplicitUsings>
         <Nullable>enable</Nullable>
-        <IsPackable>false</IsPackable>
+        <IsPackable>true</IsPackable>
+        <Version>8.0.4-net10.1</Version>
+        <PackageId>ModernZone.IdentityServer8.Security</PackageId>
+        <PackageLicenseExpression>Apache-2.0</PackageLicenseExpression>
+        <Description>Fork of alexhiggins732/IdentityServer8, pinned upstream commit 08051c9b, maintained by ModernZone for net10 compatibility.</Description>
+        <PackageReleaseNotes>Fork of alexhiggins732/IdentityServer8, pinned upstream commit 08051c9b, maintained by ModernZone for net10 compatibility.</PackageReleaseNotes>
+        <RepositoryUrl>https://github.com/ModernZone/IdentityServer8</RepositoryUrl>
+        <RepositoryType>git</RepositoryType>
+        <Authors>ModernZone</Authors>
+        <PackageProjectUrl>https://github.com/ModernZone/IdentityServer8</PackageProjectUrl>
     </PropertyGroup>
 
     <ItemGroup>
